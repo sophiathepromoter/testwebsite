@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon - Hotel Grand Opening</title>
+  <link rel="icon" href="/logo.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #fff; /* Set text color to white */
+    }
+
+    #comingSoonContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
+      color: #fff; /* Set text color to white */
+    }
+
+    #logo {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 20px;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .digit {
+      font-size: 3rem;
+      margin: 0 5px;
+    }
+
+    @media (max-width: 600px) {
+      #countdown {
+        font-size: 1.5rem;
+      }
+
+      .digit {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="comingSoonContainer">
+  <img id="logo" src="logo.jpeg" alt="Hotel Logo">
+  <h1>ValentinoSwiss - Coming Soon</h1>
+  <p>Exciting news! Coming soon to Port Harcourt City – Valentino Swiss Hotel and Apartment! </p>
+  <p>Immerse yourself in luxury with premium rooms and exquisite apartments. Enjoy top-notch amenities like restaurants, a sky bar, pool, gym, spa, mini mart, event hall, and more! <br><br>
+
+Anticipate an unforgettable stay. We can't wait to welcome you!</p>
+  <div id="countdown">
+    <span id="days" class="digit">00</span>
+    <span>:</span>
+    <span id="hours" class="digit">00</span>
+    <span>:</span>
+    <span id="minutes" class="digit">00</span>
+    <span>:</span>
+    <span id="seconds" class="digit">00</span>
+  </div>
+</div>
+
+<script>
+  var countDownDate = new Date("Feb 10, 2024 00:00:00").getTime();
+  var images = ["room1.jpg", "room2.jpg", "room4.jpg"]; // Replace with your image paths
+  var currentIndex = 0;
+
+  function changeBackground() {
+    document.getElementById("comingSoonContainer").style.backgroundImage = "url('" + images[currentIndex] + "')";
+    currentIndex = (currentIndex + 1) % images.length;
+  }
+
+  function updateCountdown() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = formatDigit(days);
+    document.getElementById("hours").innerText = formatDigit(hours);
+    document.getElementById("minutes").innerText = formatDigit(minutes);
+    document.getElementById("seconds").innerText = formatDigit(seconds);
+
+    if (distance < 0) {
+      clearInterval(countdownInterval);
+      document.getElementById("countdown").innerHTML = "We're Open!";
+    }
+  }
+
+  function formatDigit(digit) {
+    return digit < 10 ? "0" + digit : digit;
+  }
+
+  // Initial setup
+  changeBackground(); // Change background initially
+  var countdownInterval = setInterval(function() {
+    changeBackground(); // Change background every second
+    updateCountdown();
+  }, 1000); // Change background every 1 second
+</script>
+
+</body>
+</html>

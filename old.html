@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>We're Hiring! Apply Now</h2>
+        <form id="recruitmentForm" enctype="multipart/form-data">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="cv">Upload CV:</label>
+            <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input, button {
+    margin-bottom: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+</style>
+
+
+<script>
+    function submitForm() {
+    const form = document.getElementById('recruitmentForm');
+    const formData = new FormData(form);
+
+    // Display "Please wait" message
+    const submitButton = form.querySelector('button');
+    submitButton.disabled = true;
+    submitButton.innerHTML = 'Please wait...';
+
+    // You can add additional validation here if needed
+
+    fetch('submit.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert(data); // Display the response from the server
+        form.reset(); // Optionally, reset the form after successful submission
+
+        // Reset the submit button
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Submit';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+
+        // Reset the submit button
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Submit';
+    });
+}
+
+
+</script>

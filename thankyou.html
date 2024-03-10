@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="logo.ico" type="image/x-icon">
+  <title>Thank You</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; /* Align content to the right */
+      justify-content: flex-end; /* Align content to the bottom */
+      height: 100vh;
+      padding: 20px;
+      text-align: center;
+      position: relative; /* Add position relative to the container */
+    }
+
+    .logo {
+      max-width: 100px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    /* Add CSS for the background image */
+    .container {
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.5s ease;
+    }
+
+    /* Add CSS for the transparent button */
+    .transparent-button {
+      position: absolute;
+      top: 20px; /* Adjust the top position as desired */
+      right: 20px; /* Adjust the right position as desired */
+      background-color: rgba(255, 255, 255, 0.5); /* Set the background color with transparency */
+      border: none;
+      color: #333; /* Set the font color */
+      font-size: 24px;
+      padding: 10px 20px; /* Adjust the padding as desired */
+      border-radius: 5px; /* Add border radius for a rounded look */
+      cursor: pointer;
+      backdrop-filter: blur(5px); /* Apply a blur effect to create a glass-like appearance */
+    }
+
+    /* Add hover effect to the transparent button */
+    .transparent-button:hover {
+      background-color: rgba(255, 255, 255, 0.7); /* Adjust the background color on hover */
+    }
+
+    /* Add transition effect */
+    .transparent-button {
+      transition: background-color 0.3s ease;
+    }
+  </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.container');
+      const images = [
+        'news/image.jpeg',
+        'news/image1.jpeg',
+        'news/image3.jpeg'
+      ];
+      let currentImageIndex = 0;
+
+      function changeBackgroundImage() {
+        container.style.backgroundImage = `url(${images[currentImageIndex]})`;
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+      }
+
+      // Call the changeBackgroundImage function initially
+      changeBackgroundImage();
+
+      // Change the background image every 3 seconds (3000 milliseconds)
+      setInterval(changeBackgroundImage, 3000);
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <a href="home.html" class="transparent-button">Home</a>
+    <h1 style="color: green;">Thank You!</h1>
+    <p style="color: green;">We appreciate your subscription.</p>
+  </div>
+</body>
+
+</html>
